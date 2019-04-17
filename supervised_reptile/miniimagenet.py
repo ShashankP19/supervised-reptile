@@ -11,6 +11,8 @@ import os
 import random
 
 from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import numpy as np
 
 def read_dataset(data_dir):

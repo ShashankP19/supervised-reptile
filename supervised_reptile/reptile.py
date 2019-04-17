@@ -39,7 +39,8 @@ class Reptile:
                    inner_iters,
                    replacement,
                    meta_step_size,
-                   meta_batch_size):
+                   meta_batch_size
+                   ):
         """
         Perform a Reptile training step.
 
@@ -72,7 +73,7 @@ class Reptile:
             self._model_state.import_variables(old_vars)
         new_vars = average_vars(new_vars)
         self._model_state.import_variables(interpolate_vars(old_vars, new_vars, meta_step_size))
-
+    
     def evaluate(self,
                  dataset,
                  input_ph,

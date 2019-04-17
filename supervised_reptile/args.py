@@ -16,8 +16,13 @@ def argument_parser():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--pretrained', help='evaluate a pre-trained model',
                         action='store_true', default=False)
+    parser.add_argument('--org', help='run code for model without regularization',
+                        action='store_true', default=False)
+    parser.add_argument('--reg', help='run code for model with regularization',
+                        action='store_true', default=False)
     parser.add_argument('--seed', help='random seed', default=0, type=int)
-    parser.add_argument('--checkpoint', help='checkpoint directory', default='model_checkpoint')
+    parser.add_argument('--checkpoint_org', help='checkpoint directory for model without regularization', default='model_checkpoint')
+    parser.add_argument('--checkpoint_reg', help='checkpoint directory for model with regularization', default='model_checkpoint')
     parser.add_argument('--classes', help='number of classes per inner task', default=5, type=int)
     parser.add_argument('--shots', help='number of examples per class', default=5, type=int)
     parser.add_argument('--train-shots', help='shots in a training batch', default=0, type=int)
@@ -73,7 +78,7 @@ def train_kwargs(parsed_args):
         'eval_interval': parsed_args.eval_interval,
         'weight_decay_rate': parsed_args.weight_decay,
         'transductive': parsed_args.transductive,
-        'reptile_fn': _args_reptile(parsed_args)
+        'reptile_fn': _args_reptile(parsed_args),
     }
 
 def evaluate_kwargs(parsed_args):
